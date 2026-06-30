@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./Form.module.css";
 
 import { Input } from "./Input";
+import { Button } from "../Button";
 
 type FormProps = {
     initialValue: string;
@@ -27,12 +28,12 @@ export const Form = (props: FormProps) => {
             }}
         >
             <Input value={inputValue} onValueChange={(value) => setInputValue(value)} />
-            <button type={"submit"}>
+            <Button variant="icon" type="submit">
                 <CheckIcon />
-            </button>
-            <button type={"reset"}>
+            </Button>
+            <Button variant="icon" type="reset">
                 <Cross1Icon />
-            </button>
+            </Button>
         </form>
     );
 };

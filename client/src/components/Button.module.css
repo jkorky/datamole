@@ -1,0 +1,22 @@
+.button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.primary {
+    width: 25px;
+    height: 25px;
+    background-color: var(--grass-9);
+    border: 1px solid var(--olive-9);
+    border-radius: 50%;
+    color: #fff;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    color: var(--olive-11);
+}

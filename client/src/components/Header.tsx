@@ -2,6 +2,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import React, { useState } from "react";
 import styles from "./Header.module.css";
 import { Form } from "./form";
+import { Button } from "./Button";
 
 type HeaderProps = {
     children: React.ReactNode;
@@ -25,9 +26,9 @@ export const Header = (props: HeaderProps) => {
                     onCancel={() => setIsAdding(false)}
                 />
             ) : (
-                <button type="button" className={styles.button} onClick={() => setIsAdding(true)}>
+                <Button variant="primary" onClick={() => setIsAdding(true)}>
                     <PlusIcon />
-                </button>
+                </Button>
             )}
         </header>
     );

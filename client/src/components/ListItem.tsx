@@ -1,8 +1,9 @@
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./ListItem.module.css";
 import { Checkbox } from "./Checkbox";
 import { Form } from "./form";
+import { Button } from "./Button";
 
 export type LiteeItemProp = {
     label: string;
@@ -20,9 +21,9 @@ export const ListItem = (props: LiteeItemProp) => {
         <div className={styles.item}>
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <label className={styles.label}>{label}</label>
-            <button type="button" onClick={() => onItemDelete()}>
+            <Button variant="icon" onClick={() => onItemDelete()}>
                 <TrashIcon />
-            </button>
+            </Button>
             {isEditing ? (
                 <Form
                     initialValue={label}
@@ -33,9 +34,9 @@ export const ListItem = (props: LiteeItemProp) => {
                     onCancel={() => setIsEditing(false)}
                 />
             ) : (
-                <button type="button" onClick={() => setIsEditing(true)}>
+                <Button variant="icon" onClick={() => setIsEditing(true)}>
                     <Pencil1Icon />
-                </button>
+                </Button>
             )}
         </div>
     );

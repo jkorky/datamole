@@ -1,8 +1,9 @@
 .item {
     display: flex;
     align-items: center;
-    gap: 12px; /* consider using design tokens for spacing */
+    gap: 12px;
 }
 .label {
-    margin-left: 15px;
+    flex: 1;
+    min-width: 0;
 }

@@ -51,6 +51,20 @@ export const App = () => {
         setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
     };
 
+    const handleDoneToggle = async (id: number, isDone: boolean | "indeterminate") => {
+        if (typeof isDone !== "boolean") return;
+
+        const response = await fetch(`http://localhost:3000/items/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ isDone }),
+        });
+
+        const updatedItem: TodoItem = await response.json();
+
+        setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
+    };
+
     return (
         <Container>
             <Layout>
@@ -62,7 +76,7 @@ export const App = () => {
                             label={item.label}
                             isDone={item.isDone}
                             onItemLabelEdit={(label) => handleEdit(item.id, label)}
-                            onItemDoneToggle={() => {}}
+                            onItemDoneToggle={(isDone) => handleDoneToggle(item.id, isDone)}
                             onItemDelete={() => {}}
                         />
                     ))}

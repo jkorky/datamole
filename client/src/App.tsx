@@ -22,10 +22,25 @@ export const App = () => {
             .then((data: TodoItem[]) => setItems(data));
     }, []);
 
+    const handleAdd = async (label: string) => {
+        const trimmedLabel = label.trim();
+        if (!trimmedLabel) return;
+        const response = await fetch("http://localhost:3000/items", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                label: trimmedLabel,
+                isDone: false,
+            }),
+        });
+        const newItem: TodoItem = await response.json();
+        setItems((prev) => [...prev, newItem]);
+    };
+
     return (
         <Container>
             <Layout>
-                <Header onItemAdd={() => console.warn("unimplemented")}>To Do app</Header>
+                <Header onItemAdd={handleAdd}>To Do app</Header>
                 <List>
                     {items.map((item) => (
                         <ListItem

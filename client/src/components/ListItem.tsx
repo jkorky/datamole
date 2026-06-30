@@ -18,26 +18,31 @@ export const ListItem = (props: LiteeItemProp) => {
     const [isEditing, setIsEditing] = useState(false);
 
     return (
-        <div className={styles.item}>
+        <div className={`${styles.item} ${isEditing ? styles.editing : ""}`}>
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
             <label className={styles.label}>{label}</label>
-            <Button variant="icon" onClick={() => onItemDelete()}>
-                <TrashIcon />
-            </Button>
-            {isEditing ? (
-                <Form
-                    initialValue={label}
-                    onSubmit={(value) => {
-                        onItemLabelEdit(value);
-                        setIsEditing(false);
-                    }}
-                    onCancel={() => setIsEditing(false)}
-                />
-            ) : (
-                <Button variant="icon" onClick={() => setIsEditing(true)}>
-                    <Pencil1Icon />
-                </Button>
-            )}
+
+            <div className={styles.actions}>
+                {isEditing ? (
+                    <Form
+                        initialValue={label}
+                        onSubmit={(value) => {
+                            onItemLabelEdit(value);
+                            setIsEditing(false);
+                        }}
+                        onCancel={() => setIsEditing(false)}
+                    />
+                ) : (
+                    <>
+                        <Button variant="icon" onClick={() => onItemDelete()}>
+                            <TrashIcon />
+                        </Button>
+                        <Button variant="icon" onClick={() => setIsEditing(true)}>
+                            <Pencil1Icon />
+                        </Button>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

@@ -81,6 +81,9 @@ export const App = () => {
         setItems((prev) => prev.filter((item) => item.id !== id));
     };
 
+    const todoCount = items.filter((item) => !item.isDone).length;
+    const doneCount = items.filter((item) => item.isDone).length;
+
     return (
         <Container>
             <Layout>
@@ -97,7 +100,7 @@ export const App = () => {
                         />
                     ))}
                 </List>
-                <Footer />
+                <Footer todoItems={todoCount} doneItems={doneCount} />
             </Layout>
         </Container>
     );

@@ -7,7 +7,7 @@ type FooterProps = {
 };
 
 export const Footer = (props: FooterProps) => {
-    const { todoItems, doneItems } = props;
+    const { todoItems = 0, doneItems = 0 } = props;
 
     return (
         <footer className={styles.footer}>

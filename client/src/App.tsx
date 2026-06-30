@@ -65,6 +65,13 @@ export const App = () => {
         setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
     };
 
+    const handleDelete = async (id: number) => {
+        await fetch(`http://localhost:3000/items/${id}`, {
+            method: "DELETE",
+        });
+        setItems((prev) => prev.filter((item) => item.id !== id));
+    };
+
     return (
         <Container>
             <Layout>
@@ -77,7 +84,7 @@ export const App = () => {
                             isDone={item.isDone}
                             onItemLabelEdit={(label) => handleEdit(item.id, label)}
                             onItemDoneToggle={(isDone) => handleDoneToggle(item.id, isDone)}
-                            onItemDelete={() => {}}
+                            onItemDelete={() => handleDelete(item.id)}
                         />
                     ))}
                 </List>

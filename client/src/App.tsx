@@ -37,6 +37,20 @@ export const App = () => {
         setItems((prev) => [...prev, newItem]);
     };
 
+    const handleEdit = async (id: number, label: string) => {
+        const trimmedLabel = label.trim();
+        if (!trimmedLabel) return;
+
+        const response = await fetch(`http://localhost:3000/items/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ label: trimmedLabel }),
+        });
+
+        const updatedItem: TodoItem = await response.json();
+        setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
+    };
+
     return (
         <Container>
             <Layout>
@@ -47,7 +61,7 @@ export const App = () => {
                             key={item.id}
                             label={item.label}
                             isDone={item.isDone}
-                            onItemLabelEdit={() => {}}
+                            onItemLabelEdit={(label) => handleEdit(item.id, label)}
                             onItemDoneToggle={() => {}}
                             onItemDelete={() => {}}
                         />

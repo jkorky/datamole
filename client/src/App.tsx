@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Container } from "./components/Container";
 import { Layout } from "./components/Layout";
 import { List } from "./components/List";
@@ -21,6 +21,15 @@ export const App = () => {
             .then((response) => response.json())
             .then((data: TodoItem[]) => setItems(data));
     }, []);
+
+    const sortedItems = useMemo(() => {
+        return [...items].sort((a, b) => {
+            if (a.isDone !== b.isDone) {
+                return a.isDone ? 1 : -1;
+            }
+            return b.createdAt - a.createdAt;
+        });
+    }, [items]);
 
     const handleAdd = async (label: string) => {
         const trimmedLabel = label.trim();
@@ -77,7 +86,7 @@ export const App = () => {
             <Layout>
                 <Header onItemAdd={handleAdd}>To Do app</Header>
                 <List>
-                    {items.map((item) => (
+                    {sortedItems.map((item) => (
                         <ListItem
                             key={item.id}
                             label={item.label}

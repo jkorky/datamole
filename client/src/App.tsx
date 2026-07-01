@@ -7,6 +7,7 @@ import { Footer } from "./components/Footer";
 import "./global.css";
 import { ListItem } from "./components/ListItem";
 import { TodoItem } from "./types/todoItem";
+import { sortTodoItems } from "./utils/sortTodoItems";
 
 export const App = () => {
     const [items, setItems] = useState<TodoItem[]>([]);
@@ -16,14 +17,7 @@ export const App = () => {
             .then((data: TodoItem[]) => setItems(data));
     }, []);
 
-    const sortedItems = useMemo(() => {
-        return [...items].sort((a, b) => {
-            if (a.isDone !== b.isDone) {
-                return a.isDone ? 1 : -1;
-            }
-            return b.createdAt - a.createdAt;
-        });
-    }, [items]);
+    const sortedItems = useMemo(() => sortTodoItems(items), [items]);
 
     const handleAdd = async (label: string) => {
         const trimmedLabel = label.trim();

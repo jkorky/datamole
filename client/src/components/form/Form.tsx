@@ -1,5 +1,5 @@
 import { CheckIcon, Cross1Icon } from "@radix-ui/react-icons";
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Form.module.css";
 
 import { Input } from "./Input";
@@ -15,6 +15,14 @@ export const Form = (props: FormProps) => {
     const { initialValue, onSubmit, onCancel } = props;
 
     const [inputValue, setInputValue] = useState(initialValue);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+        if (initialValue) {
+            inputRef.current?.select();
+        }
+    }, [initialValue]);
 
     return (
         <form
@@ -27,7 +35,7 @@ export const Form = (props: FormProps) => {
                 onCancel();
             }}
         >
-            <Input value={inputValue} onValueChange={(value) => setInputValue(value)} />
+            <Input ref={inputRef} value={inputValue} onValueChange={(value) => setInputValue(value)} />
             <Button variant="default" type="submit">
                 <CheckIcon />
             </Button>

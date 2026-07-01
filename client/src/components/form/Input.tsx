@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styles from "./Input.module.css";
 
 type InputProps = {
@@ -5,11 +6,12 @@ type InputProps = {
     onValueChange: (value: string) => void;
 };
 
-export const Input = (props: InputProps) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     const { value, onValueChange } = props;
 
     return (
         <input
+            ref={ref}
             className={styles.input}
             value={value}
             onChange={(e) => {
@@ -18,4 +20,6 @@ export const Input = (props: InputProps) => {
             }}
         />
     );
-};
+});
+
+Input.displayName = "Input";

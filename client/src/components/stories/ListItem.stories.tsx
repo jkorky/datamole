@@ -8,18 +8,23 @@ const meta = {
     argTypes: {
         onItemDelete: { action: "removed" },
         onItemLabelEdit: { action: "edited" },
+        onItemDoneToggle: { action: "done toggled" },
     },
 } as Meta<typeof ListItem>;
+
 export default meta;
 type Story = StoryObj<typeof ListItem>;
-export const ToDo: Story = {
-    args: {
-        label: "Lorem ipsum dolor",
-    },
+
+const emptyHandlers = {
+    onItemLabelEdit: () => {},
+    onItemDoneToggle: () => {},
+    onItemDelete: () => {},
 };
-export const Done: Story = {
+
+export const Default: Story = {
     args: {
-        ...ToDo.args,
-        checked: true,
+        label: "Default",
+        isDone: false,
+        ...emptyHandlers,
     },
 };

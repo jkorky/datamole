@@ -43,7 +43,7 @@ export const EmptyList: Story = {
     render: () => (
         <Layout>
             <Header onItemAdd={() => {}}>To Do app</Header>
-            <List />
+            <List>{null}</List>
             <Footer />
         </Layout>
     ),

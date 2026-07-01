@@ -8,13 +8,13 @@ import "./global.css";
 import { ListItem } from "./components/ListItem";
 import { TodoItem } from "./types/todoItem";
 import { sortTodoItems } from "./utils/sortTodoItems";
+import * as itemsApi from "./api/itemsApi";
 
 export const App = () => {
     const [items, setItems] = useState<TodoItem[]>([]);
+
     useEffect(() => {
-        fetch("http://localhost:3000/items")
-            .then((response) => response.json())
-            .then((data: TodoItem[]) => setItems(data));
+        itemsApi.fetchItems().then(setItems);
     }, []);
 
     const sortedItems = useMemo(() => sortTodoItems(items), [items]);
@@ -22,15 +22,8 @@ export const App = () => {
     const handleAdd = async (label: string) => {
         const trimmedLabel = label.trim();
         if (!trimmedLabel) return;
-        const response = await fetch("http://localhost:3000/items", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                label: trimmedLabel,
-                isDone: false,
-            }),
-        });
-        const newItem: TodoItem = await response.json();
+
+        const newItem = await itemsApi.createItem(trimmedLabel);
         setItems((prev) => [...prev, newItem]);
     };
 
@@ -38,35 +31,19 @@ export const App = () => {
         const trimmedLabel = label.trim();
         if (!trimmedLabel) return;
 
-        const response = await fetch(`http://localhost:3000/items/${id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ label: trimmedLabel }),
-        });
-
-        const updatedItem: TodoItem = await response.json();
+        const updatedItem = await itemsApi.updateItemLabel(id, trimmedLabel);
         setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
     };
 
     const handleDoneToggle = async (id: number, isDone: boolean | "indeterminate") => {
         if (typeof isDone !== "boolean") return;
 
-        const response = isDone
-            ? await fetch(`http://localhost:3000/items/${id}/done`, { method: "PATCH" })
-            : await fetch(`http://localhost:3000/items/${id}`, {
-                  method: "PATCH",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ isDone: false, finishedAt: null }),
-              });
-
-        const updatedItem: TodoItem = await response.json();
+        const updatedItem = isDone ? await itemsApi.markItemDone(id) : await itemsApi.markItemTodo(id);
         setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
     };
 
     const handleDelete = async (id: number) => {
-        await fetch(`http://localhost:3000/items/${id}`, {
-            method: "DELETE",
-        });
+        await itemsApi.deleteItem(id);
         setItems((prev) => prev.filter((item) => item.id !== id));
     };
 

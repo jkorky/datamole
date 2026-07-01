@@ -26,7 +26,7 @@ export const Header = (props: HeaderProps) => {
                     onCancel={() => setIsAdding(false)}
                 />
             ) : (
-                <Button variant="emphasized" onClick={() => setIsAdding(true)}>
+                <Button variant="emphasized" aria-label="Add todo item" onClick={() => setIsAdding(true)}>
                     <PlusIcon />
                 </Button>
             )}

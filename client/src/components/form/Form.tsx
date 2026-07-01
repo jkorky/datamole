@@ -36,10 +36,10 @@ export const Form = (props: FormProps) => {
             }}
         >
             <Input ref={inputRef} value={inputValue} onValueChange={(value) => setInputValue(value)} />
-            <Button variant="default" type="submit">
+            <Button variant="default" type="submit" aria-label="Save">
                 <CheckIcon />
             </Button>
-            <Button variant="default" type="reset">
+            <Button variant="default" type="reset" aria-label="Cancel">
                 <Cross1Icon />
             </Button>
         </form>

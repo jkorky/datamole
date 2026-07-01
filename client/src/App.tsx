@@ -12,6 +12,7 @@ type TodoItem = {
     label: string;
     isDone: boolean;
     createdAt: number;
+    finishedAt?: number;
 };
 
 export const App = () => {
@@ -63,14 +64,15 @@ export const App = () => {
     const handleDoneToggle = async (id: number, isDone: boolean | "indeterminate") => {
         if (typeof isDone !== "boolean") return;
 
-        const response = await fetch(`http://localhost:3000/items/${id}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ isDone }),
-        });
+        const response = isDone
+            ? await fetch(`http://localhost:3000/items/${id}/done`, { method: "PATCH" })
+            : await fetch(`http://localhost:3000/items/${id}`, {
+                  method: "PATCH",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ isDone: false, finishedAt: null }),
+              });
 
         const updatedItem: TodoItem = await response.json();
-
         setItems((prev) => prev.map((item) => (item.id === id ? updatedItem : item)));
     };
 

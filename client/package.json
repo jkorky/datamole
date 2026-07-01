@@ -10,7 +10,7 @@
         "build:storybook": "storybook build --disable-telemetry --webpack-stats-json",
         "preview": "vite preview",
         "format": "prettier --write \"src/**/*.ts*\"",
-        "lint": "eslint \"src/**/*.ts*\" --fix"
+        "lint": "ESLINT_USE_FLAT_CONFIG=false eslint \"src/**/*.ts*\" --fix"
     },
     "dependencies": {
         "@radix-ui/colors": "^3.0.0",

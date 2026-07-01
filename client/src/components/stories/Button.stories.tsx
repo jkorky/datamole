@@ -1,5 +1,5 @@
-import { PlusIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import { Meta, StoryObj } from "@storybook/react";
+import { PlusIcon, Pencil1Icon } from "@radix-ui/react-icons";
+import { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Button } from "../Button";
 

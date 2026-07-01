@@ -28,10 +28,10 @@ export const Form = (props: FormProps) => {
             }}
         >
             <Input value={inputValue} onValueChange={(value) => setInputValue(value)} />
-            <Button variant="icon" type="submit">
+            <Button variant="default" type="submit">
                 <CheckIcon />
             </Button>
-            <Button variant="icon" type="reset">
+            <Button variant="default" type="reset">
                 <Cross1Icon />
             </Button>
         </form>

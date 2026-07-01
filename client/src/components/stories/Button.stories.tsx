@@ -14,39 +14,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
+export const Default: Story = {
     args: {
-        variant: "primary",
-        children: <PlusIcon />,
-    },
-};
-
-export const Icon: Story = {
-    args: {
-        variant: "icon",
+        variant: "default",
         children: <Pencil1Icon />,
     },
 };
 
-export const IconDelete: Story = {
+export const Emphasized: Story = {
     args: {
-        variant: "icon",
-        children: <TrashIcon />,
+        variant: "emphasized",
+        children: <PlusIcon />,
     },
-};
-
-export const AllVariants: Story = {
-    render: () => (
-        <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <Button variant="primary">
-                <PlusIcon />
-            </Button>
-            <Button variant="icon">
-                <Pencil1Icon />
-            </Button>
-            <Button variant="icon">
-                <TrashIcon />
-            </Button>
-        </div>
-    ),
 };

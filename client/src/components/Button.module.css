@@ -6,7 +6,7 @@
     cursor: pointer;
 }
 
-.primary {
+.emphasized {
     width: 25px;
     height: 25px;
     background-color: var(--grass-9);
@@ -15,7 +15,7 @@
     color: #fff;
 }
 
-.icon {
+.default {
     width: 25px;
     height: 25px;
     color: var(--olive-11);

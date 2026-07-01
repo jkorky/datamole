@@ -26,7 +26,7 @@ export const Header = (props: HeaderProps) => {
                     onCancel={() => setIsAdding(false)}
                 />
             ) : (
-                <Button variant="primary" onClick={() => setIsAdding(true)}>
+                <Button variant="emphasized" onClick={() => setIsAdding(true)}>
                     <PlusIcon />
                 </Button>
             )}

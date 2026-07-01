@@ -34,10 +34,10 @@ export const ListItem = (props: LiteeItemProp) => {
                     />
                 ) : (
                     <>
-                        <Button variant="icon" onClick={() => onItemDelete()}>
+                        <Button variant="default" onClick={() => onItemDelete()}>
                             <TrashIcon />
                         </Button>
-                        <Button variant="icon" onClick={() => setIsEditing(true)}>
+                        <Button variant="default" onClick={() => setIsEditing(true)}>
                             <Pencil1Icon />
                         </Button>
                     </>

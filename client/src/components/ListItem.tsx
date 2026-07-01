@@ -20,7 +20,7 @@ export const ListItem = (props: LiteeItemProp) => {
     return (
         <div className={`${styles.item} ${isEditing ? styles.editing : ""}`}>
             <Checkbox checked={isDone} onCheckedChange={onItemDoneToggle} />
-            <label className={styles.label}>{label}</label>
+            <label className={`${styles.label} ${isDone ? styles.labelDone : ""}`}>{label}</label>
 
             <div className={styles.actions}>
                 {isEditing ? (

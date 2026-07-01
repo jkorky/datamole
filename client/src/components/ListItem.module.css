@@ -8,6 +8,11 @@
     min-width: 0;
 }
 
+.labelDone {
+    color: var(--olive-9);
+    text-decoration: line-through;
+}
+
 .actions {
     display: flex;
     align-items: center;

@@ -6,14 +6,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import "./global.css";
 import { ListItem } from "./components/ListItem";
-
-type TodoItem = {
-    id: number;
-    label: string;
-    isDone: boolean;
-    createdAt: number;
-    finishedAt?: number;
-};
+import { TodoItem } from "./types/todoItem";
 
 export const App = () => {
     const [items, setItems] = useState<TodoItem[]>([]);
